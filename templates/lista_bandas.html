@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <style>
+        th,
+        td {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    </br>
+    <form type="get" action="/search" style="margin: 0">
+        <input id="banda" type="text" name="banda" placeholder="busca">
+        <button id="search_submit" type="submit">Buscar</button>
+    </form>
+
+    </br><a href="{% url 'new' %}">Cadastrar nova banda</a></br>
+
+    <table>
+        <tr>
+            <th>Nome:</th>
+            <th>Genero:</th>
+            <th>Integrantes:</th>
+            <th>Fundacao:</th>
+            <th>Ação</th>
+        </tr>
+        {% for banda in bandas %}
+        <tr>
+            <td>{{banda.nome}}</td>
+            <td>{{banda.genero}}</td>
+            <td>{{banda.integrantes}}</td>
+            <td>{{banda.fundacao}}</td>
+            <td><a href="{% url 'editar' banda.pk %}">Editar</a> <a href="{% url 'deletar' banda.pk %}">deletar</a></td>
+        </tr>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

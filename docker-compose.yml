@@ -1,0 +1,30 @@
+version: '3'
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: dg01
+        networks:
+            pso:
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/src
+        expose:
+            - "8000"
+        depends_on:
+            - banco
+    banco:
+        build:
+            context: ./postgres
+            dockerfile: Dockerfile
+        container_name: psql
+        networks:
+            pso:
+
+        volumes:
+            - ./data/:/var/lib/postgresql/data
+
+networks:
+    pso:
